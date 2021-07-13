@@ -82,7 +82,7 @@ def print_board(board):
     for row in output_list:
         print(row)
 
-# This function asks the user for a choice and returns mixed types for response
+# This function asks the user for a choice, validates it and returns mixed types for response
 # Returns "None" if the user wants to exit
 # Returns a string message in case of an error
 # Returns a tuple if the row and column indices are acceptable

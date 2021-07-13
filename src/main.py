@@ -29,10 +29,42 @@ def create_board(number_of_rows, number_of_columns, number_of_mines):
     
     return board
 
+def print_board(board):
+    characters = 'abcdefghijklmnop'
+
+    # raise an exception if the number of rows in the board is greater than the number of characters available
+    if len(board) > len(characters):
+        raise ValueError(f'Number of rows in the board cannot be larger than {len(characters)}')
+    
+    # generate the header and row-separator outputs
+    header = '   '
+    row_separator = '  '
+    for index in range(get_number_of_columns(board)):
+        header += ' ' + str(index) + ' '
+        if index < 10:
+            header += ' '
+        row_separator += '  - '
+
+    output_list = [header, row_separator]
+
+    # generate the board output
+    for row_index, row in enumerate(board):
+        output = characters[row_index] + ' | '
+        for column_index, value in enumerate(row):
+            printed_value = value
+            # check if the cell contains a mine, print an empty space instead to hide the mine
+            if value == '*':
+                printed_value = ' '
+            output += printed_value + ' | '
+        output_list.append(output)
+        output_list.append(row_separator)
+
+    
+    # print the output
+    for row in output_list:
+        print(row)
 
 
 
 
-b = create_board(10, 10, 5)
-for row in b:
-    print(row)
+print_board(create_board(16, 10, 5))

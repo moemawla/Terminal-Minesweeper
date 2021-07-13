@@ -1,7 +1,7 @@
 # Implementation plan:
 ### The below table lists all the tasks needed to finalize the application with all the proposed features. The tasks are ordered based on priority from highest to lowest.
 
-| Item | Feature | Due Date |
+| Item/Task | Feature/Scope | Due Date |
 | ---- | ------- | -------- |
 | Create the basic code that creates a board with randomly positioned mines inside | Implement the basic game with the flagging feature | July 14 |
 | The application should display the board in the terminal | Implement the basic game with the flagging feature | July 14 |
@@ -11,10 +11,14 @@
 | The application should allow the user to flag or unflag boxes in the board. | Implement the basic game with the flagging feature | July 14 |
 | The application should ask the user for the desired difficulty at the start | Implement the game difficulty feature | July 15 |
 | The application should validate the choice, print an error message if the user inputs wrong choice and ask the user to choose again | Implement the game difficulty feature | July 15 |
-| The application should set the number of mines based on the chosen difficulty | Implement the game difficulty feature | July 15 |
+| If the user chooses the "Beginner" mode, the application should add 10 mines to the board | Implement the game difficulty feature | July 15 |
+| If the user chooses the "Intermediate" mode, the application should add 40 mines to the board | Implement the game difficulty feature | July 15 |
+| If the user chooses the "Expert" mode, the application should add 99 mines to the board | Implement the game difficulty feature | July 15 |
 | The application should ask the user for the desired board size | Implement the board size feature | July 15 |
 | The application should validate the choice, print an error message if the user inputs wrong choice and ask the user to choose again | Implement the board size feature | July 15 |
-| The application should create the board based on the chosen size | Implement the board size feature | July 15 |
+| If the difficulty mode is "Beginner", the allowed sizes are 8 × 8, 9 × 9, or 10 × 10 | Implement the board size feature | July 15 |
+| If the difficulty mode is "Intermediate", the allowed sizes are 13 × 15 or 16 × 16 | Implement the board size feature | July 15 |
+| If the difficulty mode is "Expert", the size is always 16 × 30 | Implement the board size feature | July 15 |
 | Let the application track the time taken to finish the game | Implement the highest scores feature | July 15 |
 | When the user wins a game, fetch the highest score for the current game size and difficulty from the scores file | Implement the highest scores feature | July 15 |
 | Update the scores file If the user won the game in less time than the highest score | Implement the highest scores feature | July 15 |

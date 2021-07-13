@@ -1,7 +1,7 @@
 # Implementation plan:
 ### The below table lists all the tasks needed to finalize the application with all the proposed features. The tasks are ordered based on priority from highest to lowest.
 
-| Item/Task | Feature/Scope | Due Date |
+| Task | Feature/Scope | Due Date |
 | ---- | ------- | -------- |
 | Create the basic code that creates a board with randomly positioned mines inside | Implement the basic game with the flagging feature | July 14 |
 | The application should display the board in the terminal | Implement the basic game with the flagging feature | July 14 |

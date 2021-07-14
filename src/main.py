@@ -1,8 +1,18 @@
 from functions import *
-import os
 
 def play():
-    board = create_board(16, 30, 5)
+    board = create_board(16, 30, 99)
+
+    # print game instructions
+    print('''
+    Game Instructions:
+    1- To choose a cell pass its row and column indices without a space (ex: b10)
+    2- To flag or unflag a cell, type "flag" followed by a space and then the cell's location (ex: flag b10)
+    3- To leave game type "exit"
+    ''')
+    input("Press any key to start!")
+    clear_terminal()
+    print_board(board)
 
     while True:
         try:
@@ -19,7 +29,13 @@ def play():
         # user input is valid, process it
         row_index = choice[0]
         column_index = choice[1]
-        can_continue = reveal_cell(board, row_index, column_index)
+        operation = choice[2]
+
+        if operation == 'reveal':
+            can_continue = reveal_cell(board, row_index, column_index)
+        else:
+            can_continue = True
+            flag_cell(board, row_index, column_index)
 
         if not can_continue:
             # user chose a cell with a mine, game is lost
@@ -29,10 +45,7 @@ def play():
             break
         else:
             # user didn't lose yet
-
-            # clear terminal
-            os.system('clear')
-
+            clear_terminal()
             print_board(board)
             
             # check if user won

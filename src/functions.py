@@ -1,6 +1,8 @@
 import random
 
 characters = 'abcdefghijklmnop'
+accepted_cell_values = {" ", "*", "F", "0", "1", "2", "3", "4", "5", "6", "7", "8"}
+
 
 # This function accepts a list of variables, checks if any of these variables is not an integer and returns "False"
 # else returns "True".
@@ -11,45 +13,6 @@ def validate_integers(integers):
     
     return True
 
-# This function accepts a board as a parameter and returns an integer representing the number of rows.
-# Raises a ValueError if "board" is not a "list".
-def get_number_of_rows(board):
-    if not isinstance(board, list):
-        raise ValueError("The provided board must be of type 'list'")
-
-    return len(board)
-
-# This function accepts a board as a parameter and returns an integer representing the number of columns.
-# Raises a ValueError if "board" is not a "list".
-def get_number_of_columns(board):
-    if get_number_of_rows(board) == 0:
-        return 0
-    
-    return len(board[0])
-
-# This function accepts a board and a row index as parameters and checks if the index is in range of the board.
-# Raises a ValueError if "board" is not a "list".
-# Raises a ValueError if "row_index" is not an integer.
-def is_row_index_in_range(board, row_index):
-    if not validate_integers([row_index]):
-        raise ValueError("The provided row index must be an integer")
-
-    if row_index < 0 or (row_index > (get_number_of_rows(board) - 1)):
-        return False
-    
-    return True
-
-# This function accepts a board and a column index as parameters and checks if the index is in range of the board.
-# Raises a ValueError if "board" is not a "list".
-# Raises a ValueError if "row_index" is not an integer.
-def is_column_index_in_range(board, column_index):
-    if not validate_integers([column_index]):
-        raise ValueError("The provided column index must be an integer")
-
-    if column_index < 0 or column_index > (get_number_of_columns(board) - 1):
-        return False
-    
-    return True
 
 # This function accepts some parameters to create a board with the specified dimensions and number of mines.
 # Raises a ValueError if any of the numbers provided is not an integer.
@@ -81,10 +44,90 @@ def create_board(number_of_rows, number_of_columns, number_of_mines):
     
     return board
 
+
+# This function accepts a board as a parameter and returns an integer representing the number of rows.
+# Raises a ValueError if "board" is not a "list".
+def get_number_of_rows(board):
+    if not isinstance(board, list):
+        raise ValueError("The provided board must be of type 'list'")
+
+    return len(board)
+
+
+# This function accepts a board as a parameter and returns an integer representing the number of columns.
+# Raises a ValueError if "board" is not a "list".
+# Raises a ValueError if "board" doesn't have equally long rows.
+def get_number_of_columns(board):
+    if get_number_of_rows(board) == 0:
+        return 0
+    
+    number_of_columns = len(board[0])
+    for row in board:
+        if number_of_columns != len(row):
+            raise ValueError("The provided board doesn't have equally long rows")
+
+    return number_of_columns
+
+
+# This function accepts a board and a row index as parameters and checks if the index is in range of the board.
+# Raises a ValueError if "board" is not a "list".
+# Raises a ValueError if "row_index" is not an integer.
+def is_row_index_in_range(board, row_index):
+    if not validate_integers([row_index]):
+        raise ValueError("The provided row index must be an integer")
+
+    if row_index < 0 or (row_index > (get_number_of_rows(board) - 1)):
+        return False
+    
+    return True
+
+
+# This function accepts a board and a column index as parameters and checks if the index is in range of the board.
+# Raises a ValueError if "board" is not a "list".
+# Raises a ValueError if "board" doesn't have equally long rows.
+# Raises a ValueError if "row_index" is not an integer.
+def is_column_index_in_range(board, column_index):
+    if not validate_integers([column_index]):
+        raise ValueError("The provided column index must be an integer")
+
+    if column_index < 0 or column_index > (get_number_of_columns(board) - 1):
+        return False
+    
+    return True
+
+
+# This function takes a board and indices as parameters and returns the cell value specified by the indices.
+# Raises a ValueError if "board" is not a "list".
+# Raises a ValueError if "board" doesn't have equally long rows.
+# Raises a ValueError if any of the indices provided is not an integer.
+# Raises a ValueError if any of the indices provided is not in range of the board.
+def get_cell_value(board, row_index, column_index):
+    if not (is_row_index_in_range(board, row_index) and is_column_index_in_range(board, column_index)):
+        raise ValueError('The indices provided should be in range of the board')
+
+    return board[row_index][column_index]
+
+
+# This function takes a board, 2 indices and a value as parameters and sets the value in the specified cell.
+# Raises a ValueError if "board" is not a "list".
+# Raises a ValueError if "board" doesn't have equally long rows.
+# Raises a ValueError if any of the indices provided is not an integer.
+# Raises a ValueError if any of the indices provided is not in range of the board.
+def set_cell_value(board, row_index, column_index, value):
+    if not (is_row_index_in_range(board, row_index) and is_column_index_in_range(board, column_index)):
+        raise ValueError('The indices provided should be in range of the board')
+    
+    if value not in accepted_cell_values:
+        raise ValueError('The value provided is not an accepted value')
+
+    board[row_index][column_index] = value
+
+
 # This function accepts a board and prints it to the terminal in a certain style with indices.
 # Raises a ValueError if "board" is not a "list".
+# Raises a ValueError if "board" doesn't have equally long rows.
 # Raises a ValueError if the number of rows in the board is greater than 16 (the number of characters available).
-def print_board(board):
+def print_board(board, show_mines = False):
     if get_number_of_rows(board) > len(characters):
         raise ValueError(f'Number of rows in the board cannot be larger than {len(characters)}')
     
@@ -104,8 +147,10 @@ def print_board(board):
         output = characters[row_index] + ' | '
         for column_index, value in enumerate(row):
             printed_value = value
-            # check if the cell contains a mine, print an empty space instead to hide the mine
-            if value == '*':
+            # check if the cell contains a mine
+            # print an empty space to hide the mine if "show_mines" is "False"
+            # print the mine if "show_mines" is "True"
+            if value == '*' and (not show_mines):
                 printed_value = ' '
             output += printed_value + ' | '
         output_list.append(output)
@@ -115,8 +160,10 @@ def print_board(board):
     for output_row in output_list:
         print(output_row)
 
+
 # This function asks the user for a choice, validates it and returns mixed types for response.
 # Raises a ValueError if "board" is not a "list".
+# Raises a ValueError if "board" doesn't have equally long rows.
 # Raises a ValueError if the user inputs unacceptable choice.
 # Returns "None" if the user wants to exit.
 # Returns a tuple if the row and column indices are acceptable.
@@ -151,3 +198,65 @@ def get_user_choice(board):
         raise ValueError('Wrong column coordinates')
 
     return (row_index, column_index)
+
+
+# This function processes the chosen cell and updates the cell's value to show the number of surrounding mines.
+# If the chosen cell contains a mine, this function returns "False". Otherwise it returns "True".
+# If there are no surrounding mines, this function calls itself for each of the surrounding cells recursively.
+# Raises a ValueError if "board" is not a "list".
+# Raises a ValueError if "board" doesn't have equally long rows.
+# Raises a ValueError if any of the indices provided is not an integer.
+# Raises a ValueError if any of the indices provided is not in range of the board.
+def process_cell_value(board, row_index, column_index):
+    cell_value = get_cell_value(board, row_index, column_index)
+
+    # if user chooses a cell with a mine inside, the game is lost.
+    if cell_value == '*':
+        return False
+    
+    # skip if cell was already processed
+    if cell_value != ' ':
+        return True
+
+    # list representing the offsets to be added to the given indices inorder to obtain the indices for surrounding cells
+    neighbour_indices = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
+
+    # user didn't lose, calculate the number of surrounding mines
+    number_of_mines = 0
+    for neighbour_index in neighbour_indices:
+        try:
+            neighbour_row_index = row_index + neighbour_index[0]
+            neighbour_column_index = column_index + neighbour_index[1]
+            neighbour_cell_value = get_cell_value(board, neighbour_row_index, neighbour_column_index)
+
+            if neighbour_cell_value == '*':
+                number_of_mines += 1
+        except ValueError:
+            # This exception is thrown when the neighbour indices are out of board range
+            continue
+    
+    set_cell_value(board, row_index, column_index, str(number_of_mines))
+
+    # if there are no surrounding mines, open the surrounding cells recursively
+    if number_of_mines == 0:
+        for neighbour_index in neighbour_indices:
+            try:
+                neighbour_row_index = row_index + neighbour_index[0]
+                neighbour_column_index = column_index + neighbour_index[1]
+                process_cell_value(board, neighbour_row_index, neighbour_column_index)
+            except ValueError:
+                # This exception is thrown when the neighbour indices are out of board range
+                continue
+
+    return True
+
+# This function checks all the cells in the board and returns "False" if at least 1 cell is not processed yet.
+# In other words, if any cell contains a space " " the function returns "False". Otherwise it returns "True".
+def is_game_won(board):
+    for row in board:
+        for cell_value in row:
+            if cell_value == ' ':
+                return False
+    
+    return True
+

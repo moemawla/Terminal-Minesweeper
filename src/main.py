@@ -16,7 +16,25 @@ def play():
             continue
 
         # user input is valid, process it
+        row_index = choice[0]
+        column_index = choice[1]
+        result = process_cell_value(board, row_index, column_index)
 
-    #print_board(board)
+        if not result:
+            # user chose a cell with a mine, game is lost
+            # print the board and show all the mines
+            print_board(board, True)
+            print('You Lost :(')
+            break
+        else:
+            # user didn't lose yet
+            print_board(board)
+            
+            # check if user won
+            if is_game_won(board):
+                print('You Won!! :)')
+                break
+
+            continue
 
 play()

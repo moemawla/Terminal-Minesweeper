@@ -1,4 +1,5 @@
 from functions import *
+import os
 
 def play():
     board = create_board(16, 30, 5)
@@ -28,6 +29,10 @@ def play():
             break
         else:
             # user didn't lose yet
+
+            # clear terminal
+            os.system('clear')
+
             print_board(board)
             
             # check if user won

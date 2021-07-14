@@ -137,43 +137,6 @@ def set_cell_value(board, row_index, column_index, value):
     board[row_index][column_index] = value
 
 
-# This function accepts a board and prints it to the terminal in a certain style with indices.
-# Raises a ValueError if "board" is not a "list".
-# Raises a ValueError if "board" doesn't have equally long rows.
-# Raises a ValueError if the number of rows in the board is greater than 16 (the number of characters available).
-def print_board(board, show_mines = False):
-    if get_number_of_rows(board) > len(CHARACTERS):
-        raise ValueError(f"Number of rows in the board cannot be larger than {len(CHARACTERS)}")
-    
-    # generate the header and row-separator outputs
-    header = "   "
-    row_separator = "  "
-    for index in range(get_number_of_columns(board)):
-        header += " " + str(index) + " "
-        if index < 10:
-            header += " "
-        row_separator += "  - "
-
-    output_list = [header, row_separator]
-
-    # generate the board output
-    for row_index, row in enumerate(board):
-        output = CHARACTERS[row_index] + " | "
-        for cell_value in row:
-            if show_mines: # print each cell as it is
-                printed_value = cell_value
-            else: # print each cell with the appropriate value from the PRINT_MAP
-                printed_value = PRINT_MAP[cell_value]
-
-            output += printed_value + " | "
-        output_list.append(output)
-        output_list.append(row_separator)
-
-    # print the output
-    for output_row in output_list:
-        print(output_row)
-
-
 # This function asks the user for a choice, validates it and returns mixed types for response.
 # Raises a ValueError if "board" is not a "list".
 # Raises a ValueError if "board" doesn't have equally long rows.
@@ -238,7 +201,7 @@ def reveal_cell(board, row_index, column_index):
     if cell_value == "*":
         return False
     
-    # skip if cell was already processed
+    # skip if cell was already processed or flagged
     if cell_value != " ":
         return True
 
@@ -253,7 +216,7 @@ def reveal_cell(board, row_index, column_index):
             neighbour_column_index = column_index + neighbour_index[1]
             neighbour_cell_value = get_cell_value(board, neighbour_row_index, neighbour_column_index)
 
-            if neighbour_cell_value == "*":
+            if neighbour_cell_value == "*" or neighbour_cell_value == "#":
                 number_of_mines += 1
 
         except ValueError:
@@ -297,4 +260,46 @@ def is_game_won(board):
                 return False
     
     return True
+
+
+# This function accepts a board and prints it to the terminal in a certain style with indices.
+# If "show_mines" is passed as "True", print each cell as it is, except if the cell contains "#" we need to print it as "F".
+# If "show_mines" is passed as "False", print each cell with the appropriate value from the PRINT_MAP.
+# Raises a ValueError if "board" is not a "list".
+# Raises a ValueError if "board" doesn't have equally long rows.
+# Raises a ValueError if the number of rows in the board is greater than 16 (the number of characters available).
+def print_board(board, show_mines = False):
+    if get_number_of_rows(board) > len(CHARACTERS):
+        raise ValueError(f"Number of rows in the board cannot be larger than {len(CHARACTERS)}")
+    
+    # generate the header and row-separator outputs
+    header = "   "
+    row_separator = "  "
+    for index in range(get_number_of_columns(board)):
+        header += " " + str(index) + " "
+        if index < 10:
+            header += " "
+        row_separator += "  - "
+
+    output_list = [header, row_separator]
+
+    # generate the board output
+    for row_index, row in enumerate(board):
+        output = CHARACTERS[row_index] + " | "
+        for cell_value in row:
+            if show_mines: # print each cell as it is, except if the cell contains "#" we need to print it as "F"
+                if cell_value == "#":
+                    printed_value = "F"
+                else:
+                    printed_value = cell_value
+            else: # print each cell with the appropriate value from the PRINT_MAP
+                printed_value = PRINT_MAP[cell_value]
+
+            output += printed_value + " | "
+        output_list.append(output)
+        output_list.append(row_separator)
+
+    # print the output
+    for output_row in output_list:
+        print(output_row)
 

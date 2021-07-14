@@ -207,7 +207,7 @@ def get_user_choice(board):
 # Raises a ValueError if "board" doesn't have equally long rows.
 # Raises a ValueError if any of the indices provided is not an integer.
 # Raises a ValueError if any of the indices provided is not in range of the board.
-def process_cell_value(board, row_index, column_index):
+def reveal_cell(board, row_index, column_index):
     cell_value = get_cell_value(board, row_index, column_index)
 
     # if user chooses a cell with a mine inside, the game is lost.
@@ -231,6 +231,7 @@ def process_cell_value(board, row_index, column_index):
 
             if neighbour_cell_value == '*':
                 number_of_mines += 1
+
         except ValueError:
             # This exception is thrown when the neighbour indices are out of board range
             continue
@@ -243,12 +244,13 @@ def process_cell_value(board, row_index, column_index):
             try:
                 neighbour_row_index = row_index + neighbour_index[0]
                 neighbour_column_index = column_index + neighbour_index[1]
-                process_cell_value(board, neighbour_row_index, neighbour_column_index)
+                reveal_cell(board, neighbour_row_index, neighbour_column_index)
             except ValueError:
                 # This exception is thrown when the neighbour indices are out of board range
                 continue
 
     return True
+
 
 # This function checks all the cells in the board and returns "False" if at least 1 cell is not processed yet.
 # In other words, if any cell contains a space " " the function returns "False". Otherwise it returns "True".

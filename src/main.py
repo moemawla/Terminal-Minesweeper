@@ -18,9 +18,9 @@ def play():
         # user input is valid, process it
         row_index = choice[0]
         column_index = choice[1]
-        result = process_cell_value(board, row_index, column_index)
+        can_continue = reveal_cell(board, row_index, column_index)
 
-        if not result:
+        if not can_continue:
             # user chose a cell with a mine, game is lost
             # print the board and show all the mines
             print_board(board, True)

@@ -3,7 +3,12 @@ import os
 
 # Constants
 CHARACTERS = "abcdefghijklmnop"
+
 ACCEPTED_CELL_VALUES = {" ", "*", "#", "F", "0", "1", "2", "3", "4", "5", "6", "7", "8"}
+
+PRINT_MAP = {" ": " ", "*": " ", "#": "F", "F": "F", "0": "0", "1": "1",
+ "2": "2", "3": "3", "4": "4", "5": "5", "6": "6", "7": "7", "8": "8"}
+
 FLAG_MAP = {" ": "F", "F": " ", "*": "#", "#": "*", "0": "0", "1": "1",
  "2": "2", "3": "3", "4": "4", "5": "5", "6": "6", "7": "7", "8": "8"}
 
@@ -154,13 +159,12 @@ def print_board(board, show_mines = False):
     # generate the board output
     for row_index, row in enumerate(board):
         output = CHARACTERS[row_index] + " | "
-        for column_index, value in enumerate(row):
-            printed_value = value
-            # check if the cell contains a mine
-            # print an empty space to hide the mine if "show_mines" is "False"
-            # print the mine if "show_mines" is "True"
-            if value == "*" and (not show_mines):
-                printed_value = " "
+        for cell_value in row:
+            if show_mines: # print each cell as it is
+                printed_value = cell_value
+            else: # print each cell with the appropriate value from the PRINT_MAP
+                printed_value = PRINT_MAP[cell_value]
+
             output += printed_value + " | "
         output_list.append(output)
         output_list.append(row_separator)

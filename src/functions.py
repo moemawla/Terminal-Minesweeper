@@ -16,6 +16,31 @@ def validate_integers(integers):
     
     return True
 
+# This function aks the user for the game difficulty, and returns a string representing the chosen difficulty.
+# If the user inputs an unacceptable choice, the function prints an error message and asks the user to choose again.
+def get_game_difficulty():
+    print('''
+    Game difficulty modes:
+    1- Beginner (10 mines)
+    2- Intermediate (40 mines)
+    3- Expert (99 mines)
+    ''')
+
+    choice = 1
+
+    while True:
+        try:
+            choice = int(input("Please choose the difficulty "))
+            
+            if choice < 1 or choice > len(DIFFICULTY_MAP):
+                raise ValueError()
+
+            break
+        except ValueError:
+            print("Unknown choice")
+    
+    return DIFFICULTY_MAP[choice]
+
 
 # This function accepts some parameters to create a board with the specified dimensions and number of mines.
 # Raises a ValueError if any of the numbers provided is not an integer.

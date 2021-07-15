@@ -19,14 +19,9 @@ def validate_integers(integers):
 # This function aks the user for the game difficulty, and returns a string representing the chosen difficulty.
 # If the user inputs an unacceptable choice, the function prints an error message and asks the user to choose again.
 def get_game_difficulty():
-    print('''
-    Game difficulty modes:
-    1- Beginner (10 mines)
-    2- Intermediate (40 mines)
-    3- Expert (99 mines)
-    ''')
-
-    choice = 1
+    print("Game difficulty modes:")
+    for index, difficulty in enumerate(DIFFICULTY_MAP):
+        print(f"{index + 1}- {difficulty['name']} ({difficulty['mines']} mines)")
 
     while True:
         try:
@@ -35,11 +30,20 @@ def get_game_difficulty():
             if choice < 1 or choice > len(DIFFICULTY_MAP):
                 raise ValueError()
 
-            break
+            return DIFFICULTY_MAP[choice - 1]["name"]
         except ValueError:
             print("Unknown choice")
-    
-    return DIFFICULTY_MAP[choice]
+
+
+# This function searches for the specified difficulty, and returns the associated number of mines.
+# Raises a ValueError if the specified difficulty is not found in DIFFICULTY_MAP.
+def get_number_of_mines(difficulty):
+    for difficulty_mode in DIFFICULTY_MAP:
+        if difficulty_mode["name"] == difficulty:
+            return difficulty_mode["mines"]
+
+    # validate the difficulty
+    raise ValueError("Unknown difficulty")
 
 
 # This function fetches the associated sizes to the specified difficulty.
@@ -47,14 +51,14 @@ def get_game_difficulty():
 # If there are multiple sizes, it asks the user to choose the size.
 # If the user inputs an unacceptable choice, the function prints an error message and asks the user to choose again.
 # Returns a tuple of the form (rows, columns).
-# Raises a ValueError if the specified "difficulty" is not found in BOARD_SIZE_MAP.
+# Raises a ValueError if the specified difficulty is not found in BOARD_SIZES_MAP.
 def get_board_size(difficulty):
     # validate the difficulty
-    if difficulty not in BOARD_SIZE_MAP:
+    if difficulty not in BOARD_SIZES_MAP:
         raise ValueError("Unknown difficulty")
     
     # get the sizes associated with the specified difficulty
-    sizes = BOARD_SIZE_MAP[difficulty]
+    sizes = BOARD_SIZES_MAP[difficulty]
 
     # Default size if there are no size choices for the specified difficulty
     selected_size = sizes[0]

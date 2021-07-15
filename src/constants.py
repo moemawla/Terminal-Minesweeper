@@ -1,6 +1,6 @@
 ACCEPTED_CELL_VALUES = {" ", "*", "#", "F", "0", "1", "2", "3", "4", "5", "6", "7", "8"}
 
-BOARD_SIZE_MAP = {
+BOARD_SIZES_MAP = {
     "Beginner": [
         {"rows": 8, "columns": 8},
         {"rows": 9, "columns": 9},
@@ -17,7 +17,11 @@ BOARD_SIZE_MAP = {
 
 CHARACTERS = "abcdefghijklmnop"
 
-DIFFICULTY_MAP = {1: "Beginner", 2: "Intermediate", 3: "Expert"}
+DIFFICULTY_MAP = [
+    {"name": "Beginner", "mines": 10},
+    {"name": "Intermediate", "mines": 40},
+    {"name": "Expert", "mines": 99}
+]
 
 FLAG_MAP = {" ": "F", "F": " ", "*": "#", "#": "*", "0": "0", "1": "1",
  "2": "2", "3": "3", "4": "4", "5": "5", "6": "6", "7": "7", "8": "8"}

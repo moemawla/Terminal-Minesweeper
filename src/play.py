@@ -1,13 +1,16 @@
 from functions import *
+import time
 
 def play():
     try:
         # get the game difficulty and board size
         difficulty = get_game_difficulty()
         board_size = get_board_size(difficulty)
+        number_of_rows = board_size[0]
+        number_of_columns = board_size[1]
 
         # create the board
-        board = create_board(board_size[0], board_size[1], get_number_of_mines(difficulty))
+        board = create_board(number_of_rows, number_of_columns, get_number_of_mines(difficulty))
 
         # print game instructions
         print('''
@@ -17,10 +20,12 @@ Game Instructions:
 3- To leave game type "exit"
         ''')
         input("Press any key to start!")
-        clear_terminal()
+
+        # start tracking time
+        start_time = time.time()
         print_board(board)
     except KeyboardInterrupt:
-        print('Bye!')
+        print("Bye!")
         return
 
     while True:
@@ -29,7 +34,7 @@ Game Instructions:
 
             # check if user wants to exit the game
             if choice == None:
-                print('Bye!')
+                print("Bye!")
                 return
         except ValueError as e:
             print(str(e))
@@ -40,27 +45,37 @@ Game Instructions:
         column_index = choice[1]
         operation = choice[2]
 
-        if operation == 'reveal':
+        if operation == "reveal":
             can_continue = reveal_cell(board, row_index, column_index)
-        else:
-            can_continue = True
-            flag_cell(board, row_index, column_index)
 
-        if not can_continue:
-            # user chose a cell with a mine, game is lost
-            # print the board and show all the mines
-            clear_terminal()
-            print_board(board, True)
-            print('You Lost :(')
-            break
-        else:
-            # user didn't lose yet
-            clear_terminal()
-            print_board(board)
+            # check if user chose a cell with a mine, game is lost 
+            if not can_continue:
+                break
 
             # check if user won
             if is_game_won(board):
-                print('You Won!! :)')
                 break
+        else:
+            flag_cell(board, row_index, column_index)
+
+        # game didn't end yet, print the updated board
+        print_board(board)
+
+    # game ended, stop tracking time
+    total_time = time.time() - start_time
+    
+    # print board and show the mines
+    print_board(board, True)
+
+    # check if game is won or lost
+    if is_game_won(board):
+        print("You Won!! :)")
+
+        if is_fastest_time(difficulty, number_of_rows, number_of_columns, total_time):
+            print(f"You got the fastest time for {difficulty} mode and {number_of_rows}*{number_of_columns} size with {total_time} seconds!!")
+            # TODO: update the scores
+    else:
+        print("You Lost :(")
+
 
 play()

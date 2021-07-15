@@ -1,6 +1,7 @@
 import random
 import os
 from constants import *
+from scores import *
 
 
 def clear_terminal():
@@ -296,6 +297,7 @@ def reveal_cell(board, row_index, column_index):
 
     return True
 
+
 # This function accepts a board and indices as parameters and flags/unflags the specified cell.
 # Raises a ValueError if "board" is not a "list".
 # Raises a ValueError if "board" doesn't have equally long rows.
@@ -357,7 +359,35 @@ def print_board(board, show_mines = False):
         output_list.append(output)
         output_list.append(row_separator)
 
-    # print the output
+    # clear terminal and print the output
+    clear_terminal()
     for output_row in output_list:
         print(output_row)
+
+
+# This function accepts several parameters, tries to find the current fastest time based on the first 3 parameters and compares
+# the current fastest time with the new time which is passed as the fourth parameter.
+# Returns "True" if the new time is lesser than the current fastest time, and returns "False" otherwise.
+# Raises a ValueError if "difficulty" is not an accepted value.
+# Raises a ValueError if "number_of_rows", "number_of_columns" and "time" are not positive integers.
+# Raises a ValueError if the size specified by "number_of_rows" and "number_of_columns" was not found.
+def is_fastest_time(difficulty, number_of_rows, number_of_columns, time):
+    # validate the passed parameters
+    if difficulty not in fastest_time:
+        raise ValueError("Unkown difficulty")
+
+    if not validate_integers([number_of_rows, number_of_columns]) or number_of_rows < 0 or number_of_columns < 0:
+        raise ValueError("The provided parameters for number of rows and columns should be positive integers")
+
+    if not validate_integers([time]) or time < 0:
+        raise ValueError("The provided time parameter should be a positive integer")
+
+    # prepare the size and get the current fastest time
+    size = f"{str(number_of_rows)}*{str(number_of_columns)}"
+    try:
+        current_fastest_time = fastest_time[difficulty][size]
+    except KeyError:
+        raise ValueError("Size not found")
+
+    return time < current_fastest_time 
 

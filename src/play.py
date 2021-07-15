@@ -62,7 +62,7 @@ Game Instructions:
         print_board(board)
 
     # game ended, stop tracking time
-    total_time = time.time() - start_time
+    total_time = int(time.time() - start_time)
     
     # print board and show the mines
     print_board(board, True)

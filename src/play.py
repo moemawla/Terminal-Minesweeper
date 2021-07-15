@@ -1,14 +1,23 @@
 from functions import *
 
 def play():
-    board = create_board(16, 30, 99)
+    # get the game difficulty and board size
+    try:
+        difficulty = get_game_difficulty()
+        board_size = get_board_size(difficulty)
+    except KeyboardInterrupt:
+        print('Bye!')
+        return
+
+    # create the board
+    board = create_board(board_size[0], board_size[1], get_number_of_mines(difficulty))
 
     # print game instructions
     print('''
-    Game Instructions:
-    1- To choose a cell pass its row and column indices without a space (ex: b10)
-    2- To flag or unflag a cell, type "flag" followed by a space and then the cell's location (ex: flag b10)
-    3- To leave game type "exit"
+Game Instructions:
+1- To choose a cell pass its row and column indices without a space (ex: b5)
+2- To flag or unflag a cell, type "flag" followed by a space and then the cell's location (ex: flag b5)
+3- To leave game type "exit"
     ''')
     input("Press any key to start!")
     clear_terminal()
@@ -47,12 +56,10 @@ def play():
             # user didn't lose yet
             clear_terminal()
             print_board(board)
-            
+
             # check if user won
             if is_game_won(board):
                 print('You Won!! :)')
                 break
-
-            continue
 
 play()

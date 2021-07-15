@@ -42,6 +42,45 @@ def get_game_difficulty():
     return DIFFICULTY_MAP[choice]
 
 
+# This function fetches the associated sizes to the specified difficulty.
+# If there is only 1 size, it returns the size.
+# If there are multiple sizes, it asks the user to choose the size.
+# If the user inputs an unacceptable choice, the function prints an error message and asks the user to choose again.
+# Returns a tuple of the form (rows, columns).
+# Raises a ValueError if the specified "difficulty" is not found in BOARD_SIZE_MAP.
+def get_board_size(difficulty):
+    # validate the difficulty
+    if difficulty not in BOARD_SIZE_MAP:
+        raise ValueError("Unknown difficulty")
+    
+    # get the sizes associated with the specified difficulty
+    sizes = BOARD_SIZE_MAP[difficulty]
+
+    # Default size if there are no size choices for the specified difficulty
+    selected_size = sizes[0]
+
+    # if there are size choices, let the user choose
+    if len(sizes) > 1: 
+        print(f"Board sizes for {difficulty} mode:")
+        for index, size in enumerate(sizes):
+            print(f"{index + 1}- {size['rows']} rows * {size['columns']} columns")
+
+        while True:
+            try:
+                choice = int(input("Please choose the size "))
+
+                if choice < 1 or choice > len(sizes):
+                    raise ValueError()
+                
+                selected_size = sizes[choice - 1]
+
+                break
+            except ValueError:
+                print("Unknown choice")
+
+    return (selected_size["rows"], selected_size["columns"])
+
+
 # This function accepts some parameters to create a board with the specified dimensions and number of mines.
 # Raises a ValueError if any of the numbers provided is not an integer.
 # Raises a ValueError if the number of mines provided exceeds the number of positions in the board.

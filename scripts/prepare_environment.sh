@@ -35,6 +35,6 @@ virtualenv $dir_path/../appvenv
 source $dir_path/../appvenv/bin/activate
 
 # install requirements
-pip3 install -r $dir_path/../requirements.txt
+pip3 install -r $dir_path/../src/requirements.txt
 
 exit 0

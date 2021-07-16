@@ -27,6 +27,19 @@ def print_banner():
     ''', end="\n\n")
 
 
+def print_game_instructions():
+    print_banner()
+
+    print('''
+Game Instructions:
+1- To choose a cell pass its row and column indices without a space (ex: b5)
+2- To flag or unflag a cell, type "flag" followed by a space and then the cell's location (ex: flag b5)
+3- To leave game type "exit"
+    ''')
+
+    input("Press any key to start!")
+
+
 # This function accepts a list of variables, checks if any of these variables is not an integer and returns "False"
 # else returns "True".
 def validate_integers(integers):

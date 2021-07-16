@@ -1,43 +1,42 @@
 from functions import *
+from termcolor import colored
 import time
 
 
-def play():
-    print_banner()
-    
+def play(): 
+    # initialize the board
     try:
-        # get the game difficulty and board size
+        # get the game difficulty
+        print_banner()
         difficulty = get_game_difficulty()
+
+        # get the board size
+        print_banner()
         board_size = get_board_size(difficulty)
-        number_of_rows = board_size[0]
-        number_of_columns = board_size[1]
 
         # create the board
+        number_of_rows = board_size[0]
+        number_of_columns = board_size[1]
         board = create_board(number_of_rows, number_of_columns, get_number_of_mines(difficulty))
 
         # print game instructions
-        print('''
-Game Instructions:
-1- To choose a cell pass its row and column indices without a space (ex: b5)
-2- To flag or unflag a cell, type "flag" followed by a space and then the cell's location (ex: flag b5)
-3- To leave game type "exit"
-        ''')
-        input("Press any key to start!")
+        print_game_instructions()
 
         # start tracking time
         start_time = time.time()
         print_board(board)
     except KeyboardInterrupt:
-        print("Bye!")
+        print("\nBye!\n")
         return
 
+    # start the actual gameplay
     while True:
         try:
             choice = get_user_choice(board)
 
             # check if user wants to exit the game
             if choice == None:
-                print("Bye!")
+                print("\nBye!\n")
                 return
         except ValueError as e:
             print(str(e))
@@ -51,7 +50,7 @@ Game Instructions:
         if operation == "reveal":
             can_continue = reveal_cell(board, row_index, column_index)
 
-            # check if user chose a cell with a mine, game is lost 
+            # check if the user chose a cell with a mine, game is lost 
             if not can_continue:
                 break
 
@@ -72,7 +71,7 @@ Game Instructions:
 
     # check if game is won or lost
     if is_game_won(board):
-        print("You Won!! :)")
+        print(colored("You Won!! :)", "green"))
 
         if is_fastest_time(difficulty, number_of_rows, number_of_columns, total_time):
             set_fastest_time(difficulty, number_of_rows, number_of_columns, total_time)
@@ -80,7 +79,9 @@ Game Instructions:
         else:
             print(f"You finished in {total_time} seconds")
     else:
-        print("You Lost :(")
+        print(colored("You Lost :(", "red"))
+
+    print("", end="\n\n")
 
 
 play()

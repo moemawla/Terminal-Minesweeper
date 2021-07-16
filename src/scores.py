@@ -11,6 +11,7 @@ def show_scores():
     for difficulty, sizes in fastest_times.items():
         for size, time in sizes.items():
             print(f"Fastest time for {difficulty} mode and {size} board is {time} seconds.")
+    print("", end="\n\n")
 
 
 show_scores()

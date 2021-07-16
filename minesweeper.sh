@@ -1,19 +1,23 @@
 #!/bin/bash
 
-check_env="$(./scripts/check_environment.sh 2>&1)"
+# get the absolute path to the directory containing this script
+dir_path=$(dirname $(realpath $0))
 
+# check environment
+check_env="$($dir_path/scripts/check_environment.sh 2>&1)"
 if [[ $check_env == "Error:"* ]]
 then
     echo $check_env >&2
     exit 1
 fi
 
+# check and process the required argument
 if [[ $1 == "play" ]]
 then
-    python3 ./src/play.py
+    python3 $dir_path/src/play.py
 elif [[ $1 == "scores" ]]
 then
-    python3 ./src/scores.py
+    python3 $dir_path/src/scores.py
 elif [[ $1 == "help" ]]
 then
     echo "One argument is required with the following available options:"

@@ -3,13 +3,16 @@
 # get the absolute path to the directory containing this script
 dir_path=$(dirname $(realpath $0))
 
-# check environment
-check_env="$($dir_path/scripts/check_environment.sh 2>&1)"
-if [[ $check_env == "Error:"* ]]
+# prepare environment
+prep_env="$($dir_path/scripts/prepare_environment.sh 2>&1)"
+if [[ $prep_env == "Error:"* ]]
 then
-    echo $check_env >&2
+    echo $prep_env >&2
     exit 1
 fi
+
+# activate virtual env
+source $dir_path/appvenv/bin/activate
 
 # check and process the required argument
 if [[ $1 == "play" ]]

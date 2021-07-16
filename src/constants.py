@@ -48,7 +48,7 @@ DIFFICULTY_MAP = [
     }
 ]
 
-FASTEST_TIMES_FILE_PATH = os.path.join(os.path.dirname(__file__), 'fastest_times.json')
+FASTEST_TIMES_FILE_PATH = os.path.join(os.path.dirname(__file__), "fastest_times.json")
 
 FASTEST_TIMES_TEMPLATE = {
     "Beginner": {

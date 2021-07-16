@@ -8,6 +8,7 @@ from termcolor import colored
 def clear_terminal():
     os.system("clear")
 
+
 def print_banner():
     clear_terminal()
     print('''
@@ -34,6 +35,7 @@ def validate_integers(integers):
             return False
     
     return True
+
 
 # This function aks the user for the game difficulty, and returns a string representing the chosen difficulty.
 # If the user inputs an unacceptable choice, the function prints an error message and asks the user to choose again.

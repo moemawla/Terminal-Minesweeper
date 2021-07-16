@@ -370,7 +370,7 @@ def print_board(board, show_mines = False):
 # from "FASTEST_TIMES_TEMPLATE" and calls itself again to return the contents.
 def get_fastest_times_dictionary():
     try:
-        file = open("./fastest_times.json", "r")
+        file = open(FASTEST_TIMES_FILE_PATH, "r")
         contents = file.read()
         file.close()
 
@@ -389,7 +389,7 @@ def set_fastest_times_dictionary(fastest_times):
         raise ValueError("Expected a dictionary as the parameter")
 
     try:
-        file = open("./fastest_times.json", "w")
+        file = open(FASTEST_TIMES_FILE_PATH, "w")
         contents = json.dumps(fastest_times)
         file.write(contents)
     finally:

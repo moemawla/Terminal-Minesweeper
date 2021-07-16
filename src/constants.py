@@ -1,3 +1,5 @@
+import os
+
 ACCEPTED_CELL_VALUES = {" ", "*", "#", "F", "0", "1", "2", "3", "4", "5", "6", "7", "8"}
 
 BOARD_SIZES_MAP = {
@@ -22,6 +24,8 @@ DIFFICULTY_MAP = [
     {"name": "Intermediate", "mines": 40},
     {"name": "Expert", "mines": 99}
 ]
+
+FASTEST_TIMES_FILE_PATH = os.path.join(os.path.dirname(__file__), 'fastest_times.json')
 
 FASTEST_TIMES_TEMPLATE = {
     "Beginner": {

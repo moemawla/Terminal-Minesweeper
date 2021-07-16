@@ -28,7 +28,7 @@ else
         echo "Error: Unkown argument provided" >&2
     fi
 
-    echo "Run the script with 'help' argument for more info"
+    echo "Run the script with the 'help' argument for list of possible arguments"
     exit 1
 fi
 

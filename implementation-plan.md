@@ -20,11 +20,11 @@
 | If the difficulty mode is "Intermediate", the allowed sizes are 13 × 15 or 16 × 16 | Implement the board size feature | July 15 |
 | If the difficulty mode is "Expert", the size is always 16 × 30 | Implement the board size feature | July 15 |
 | The application should track the time taken to finish the game. | Implement the highest scores feature | July 16 |
-| When the user wins a game, fetch the highest score for the current game size and difficulty from the scores file | Implement the highest scores feature | July 16 |
-| The application should not break if the scores file was not found and a new file should be created instead. | Implement the highest scores feature | July 16 |
-| Update the scores file If the user won the game in less time than the highest score | Implement the highest scores feature | July 16 |
-| Print on the screen to notify the user if he got the current highest score | Implement the highest scores feature | July 16 |
-| Calling the scores module will print the highest score per game size and difficulty (based on fastest time). | Implement the highest scores feature | July 16 |
+| When the user wins a game, fetch the fastest time for the current game size and difficulty from the fastest_times file | Implement the highest scores feature | July 16 |
+| The application should not break if the fastest_times file was not found and a new file should be created instead. | Implement the highest scores feature | July 16 |
+| Update the fastest_times file If the user won the game in less time than the current fastest time | Implement the highest scores feature | July 16 |
+| Print on the screen to notify the user if he got the current fastest time | Implement the highest scores feature | July 16 |
+| Calling the scores module will print the current fastest times per board size and difficulty | Implement the highest scores feature | July 16 |
 | The bash script should make sure that the environment has all the needed services and python installed | Wrap the application with a bash script | July 16 |
 | The bash script should accept a single required argument. If the user passes a wrong, or no, argument the script should return a clear message and print "Run the script with the 'help' argument for list of possible arguments" | Wrap the application with a bash script | July 16 |
 | If the user inputs 'help' for the required argument, the bash script will return a list of the 3 possible options for the argument ("help", "play" and "scores") | Wrap the application with a bash script | July 16 |

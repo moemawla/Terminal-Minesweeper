@@ -2,6 +2,8 @@ from functions import *
 import time
 
 def play():
+    clear_terminal()
+    
     try:
         # get the game difficulty and board size
         difficulty = get_game_difficulty()

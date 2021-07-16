@@ -17,7 +17,7 @@ The application will have the following features:
     * For beginner mode, the board size is either 8 × 8, 9 × 9, or 10 × 10.
     * For intermediate mode, the board size is either 13 × 15 or 16 × 16.
     * For expert mode, the board size is always 16 × 30.
-- Option to show highest scores (chosen by the user as an argument to the script):
+- Option to show fastest times or scores (chosen by the user as an argument to the script):
     * These scores will be based on fastest time per game size and difficulty.
     * The scores will be written to, or read from, a separate file.
 
@@ -25,7 +25,7 @@ The application will have the following features:
 - The user can read the help file provided to undersatand how to start using the application and what are the possible arguments.
 - The user can also call the script with the "help" argument which will return a list of all possible arguments and their descriptions.
 - When the user runs the script with the "play" argument, the game is launched and the user can choose the difficulty and board size.
-- When the user runs the script with "scores" argument, the application will print the current highest scores to the terminal.
+- When the user runs the script with "scores" argument, the application will print the current fastest times to the terminal.
 - The application should not break if a user passes wrong, or no, arguments and instead should return an error message saying that the argument provided is not supported and print "Run the script with the 'help' argument for a list of possible arguments".
 
 

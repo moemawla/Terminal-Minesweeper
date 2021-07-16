@@ -1,7 +1,7 @@
 import random
 import os
+import json
 from constants import *
-from scores import *
 
 
 def clear_terminal():
@@ -365,29 +365,94 @@ def print_board(board, show_mines = False):
         print(output_row)
 
 
-# This function accepts several parameters, tries to find the current fastest time based on the first 3 parameters and compares
-# the current fastest time with the new time which is passed as the fourth parameter.
-# Returns "True" if the new time is lesser than the current fastest time, and returns "False" otherwise.
-# Raises a ValueError if "difficulty" is not an accepted value.
-# Raises a ValueError if "number_of_rows", "number_of_columns" and "time" are not positive integers.
+# This function returns the contents of the "fastest_times.json" file.
+# If the file was not found, this function calls set_fastest_times_dictionary() to create the file 
+# from "FASTEST_TIMES_TEMPLATE" and calls itself again to return the contents.
+def get_fastest_times_dictionary():
+    try:
+        file = open("./fastest_times.json", "r")
+        contents = file.read()
+        file.close()
+
+        return json.loads(contents)
+    except FileNotFoundError:
+        # create the file from the template
+        set_fastest_times_dictionary(FASTEST_TIMES_TEMPLATE)
+
+        return get_fastest_times_dictionary()
+
+
+# This function creates the "fastest_times.json" file and sets "fastest_times" inside the file in a json format.
+# Raises a ValueError if "fastest_times" is not a dictionary.
+def set_fastest_times_dictionary(fastest_times):
+    if not isinstance(fastest_times, dict):
+        raise ValueError("Expected a dictionary as the parameter")
+
+    try:
+        file = open("./fastest_times.json", "w")
+        contents = json.dumps(fastest_times)
+        file.write(contents)
+    finally:
+        file.close()
+
+
+# This function accepts 3 parameters and tries to find and return the current fastest time.
+# Raises a ValueError if "difficulty" was not found.
+# Raises a ValueError if "number_of_rows" and "number_of_columns" are not positive integers.
 # Raises a ValueError if the size specified by "number_of_rows" and "number_of_columns" was not found.
-def is_fastest_time(difficulty, number_of_rows, number_of_columns, time):
+def get_fastest_time(difficulty, number_of_rows, number_of_columns):
+    # get the dictionary containing the fastest times
+    fastest_times = get_fastest_times_dictionary()
+
     # validate the passed parameters
-    if difficulty not in fastest_time:
-        raise ValueError("Unkown difficulty")
+    if difficulty not in fastest_times:
+        raise ValueError("Difficulty not found")
 
     if not validate_integers([number_of_rows, number_of_columns]) or number_of_rows < 0 or number_of_columns < 0:
         raise ValueError("The provided parameters for number of rows and columns should be positive integers")
 
-    if not validate_integers([time]) or time < 0:
-        raise ValueError("The provided time parameter should be a positive integer")
-
     # prepare the size and get the current fastest time
     size = f"{str(number_of_rows)}*{str(number_of_columns)}"
     try:
-        current_fastest_time = fastest_time[difficulty][size]
+        return fastest_times[difficulty][size]
     except KeyError:
         raise ValueError("Size not found")
 
+
+# This function accepts several parameters, gets the current fastest time based on the first 3 parameters and compares
+# the current fastest time with the new time which is passed as the fourth parameter.
+# Returns "True" if the new time is lesser than the current fastest time, and returns "False" otherwise.
+# Raises a ValueError if "difficulty" was not found.
+# Raises a ValueError if "number_of_rows", "number_of_columns" and "time" are not positive integers.
+# Raises a ValueError if the size specified by "number_of_rows" and "number_of_columns" was not found.
+def is_fastest_time(difficulty, number_of_rows, number_of_columns, time):
+    # validate the "time" parameter
+    if not validate_integers([time]) or time < 0:
+        raise ValueError("The provided time parameter should be a positive integer")
+
+    # the rest of the parameters are validated by get_fastest_time()
+    current_fastest_time = get_fastest_time(difficulty, number_of_rows, number_of_columns)
+
     return time < current_fastest_time 
+
+
+# This function accepts several parameters, checks if the new time is the fastest time and sets it as the 
+# current fastest time.
+# Raises a ValueError if "difficulty" was not found.
+# Raises a ValueError if "number_of_rows", "number_of_columns" and "time" are not positive integers.
+# Raises a ValueError if the size specified by "number_of_rows" and "number_of_columns" was not found.
+# Raises a ValueError if the new time is not the fastest.
+def set_fastest_time(difficulty, number_of_rows, number_of_columns, time):
+    # validate that the new time is the fastest time
+    # params validation will also be covered
+    if not is_fastest_time(difficulty, number_of_rows, number_of_columns, time):
+        raise ValueError("The time provied is not the fastest time")
+
+    # get and update the fastest_times dictionary
+    fastest_times = get_fastest_times_dictionary()
+    size = f"{str(number_of_rows)}*{str(number_of_columns)}"
+    fastest_times[difficulty][size] = time
+
+    # save the fastest_times dictionary
+    set_fastest_times_dictionary(fastest_times)
 

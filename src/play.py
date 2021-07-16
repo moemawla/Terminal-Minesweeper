@@ -72,8 +72,10 @@ Game Instructions:
         print("You Won!! :)")
 
         if is_fastest_time(difficulty, number_of_rows, number_of_columns, total_time):
+            set_fastest_time(difficulty, number_of_rows, number_of_columns, total_time)
             print(f"You got the fastest time for {difficulty} mode and {number_of_rows}*{number_of_columns} size with {total_time} seconds!!")
-            # TODO: update the scores
+        else:
+            print(f"You finished in {total_time} seconds")
     else:
         print("You Lost :(")
 

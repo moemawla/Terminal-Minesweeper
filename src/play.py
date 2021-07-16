@@ -2,7 +2,7 @@ from functions import *
 import time
 
 def play():
-    clear_terminal()
+    print_banner()
     
     try:
         # get the game difficulty and board size

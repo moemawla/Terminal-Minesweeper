@@ -1,10 +1,11 @@
 from functions import *
 
 
-def show_scores():
+def show_scores():    
+    print_banner()
+
     fastest_times = get_fastest_times_dictionary()
-    
-    clear_terminal()
+
     print("The current fastest times:")
     print("**************************")
     for difficulty, sizes in fastest_times.items():

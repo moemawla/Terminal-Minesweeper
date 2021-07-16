@@ -19,10 +19,33 @@ BOARD_SIZES_MAP = {
 
 CHARACTERS = "abcdefghijklmnop"
 
+COLOR_MAP = {
+    "*": "red",
+    "F": "red",
+    "0": "white",
+    "1": "blue",
+    "2": "green",
+    "3": "red",
+    "4": "yellow",
+    "5": "magenta",
+    "6": "cyan",
+    "7": "yellow",
+    "8": "grey"
+}
+
 DIFFICULTY_MAP = [
-    {"name": "Beginner", "mines": 10},
-    {"name": "Intermediate", "mines": 40},
-    {"name": "Expert", "mines": 99}
+    {
+        "name": "Beginner",
+        "mines": 10
+    },
+    {
+        "name": "Intermediate",
+        "mines": 40
+    },
+    {
+        "name": "Expert",
+        "mines": 99
+    }
 ]
 
 FASTEST_TIMES_FILE_PATH = os.path.join(os.path.dirname(__file__), 'fastest_times.json')
@@ -42,8 +65,34 @@ FASTEST_TIMES_TEMPLATE = {
     }
 }
 
-FLAG_MAP = {" ": "F", "F": " ", "*": "#", "#": "*", "0": "0", "1": "1",
- "2": "2", "3": "3", "4": "4", "5": "5", "6": "6", "7": "7", "8": "8"}
+FLAG_MAP = {
+    " ": "F",
+    "F": " ",
+    "*": "#",
+    "#": "*",
+    "0": "0",
+    "1": "1",
+    "2": "2",
+    "3": "3",
+    "4": "4",
+    "5": "5",
+    "6": "6",
+    "7": "7",
+    "8": "8"
+}
 
-PRINT_MAP = {" ": " ", "*": " ", "#": "F", "F": "F", "0": "0", "1": "1",
- "2": "2", "3": "3", "4": "4", "5": "5", "6": "6", "7": "7", "8": "8"}
+PRINT_MAP = {
+    " ": " ",
+    "*": " ",
+    "#": "F",
+    "F": "F",
+    "0": "0",
+    "1": "1",
+    "2": "2",
+    "3": "3",
+    "4": "4",
+    "5": "5",
+    "6": "6",
+    "7": "7",
+    "8": "8"
+}

@@ -2,6 +2,7 @@ import random
 import os
 import json
 from constants import *
+from termcolor import colored
 
 
 def clear_terminal():
@@ -372,7 +373,15 @@ def print_board(board, show_mines = False):
             else: # print each cell with the appropriate value from the PRINT_MAP
                 printed_value = PRINT_MAP[cell_value]
 
+            # color the cell contents
+            try:
+                printed_value = colored(printed_value, COLOR_MAP[printed_value])
+            except KeyError:
+                # don't color if mapping not found
+                pass
+
             output += printed_value + " | "
+
         output_list.append(output)
         output_list.append(row_separator)
 

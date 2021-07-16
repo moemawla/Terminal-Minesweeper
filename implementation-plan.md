@@ -19,8 +19,9 @@
 | If the difficulty mode is "Beginner", the allowed sizes are 8 × 8, 9 × 9, or 10 × 10 | Implement the board size feature | July 15 |
 | If the difficulty mode is "Intermediate", the allowed sizes are 13 × 15 or 16 × 16 | Implement the board size feature | July 15 |
 | If the difficulty mode is "Expert", the size is always 16 × 30 | Implement the board size feature | July 15 |
-| Let the application track the time taken to finish the game | Implement the highest scores feature | July 16 |
+| The application should track the time taken to finish the game. | Implement the highest scores feature | July 16 |
 | When the user wins a game, fetch the highest score for the current game size and difficulty from the scores file | Implement the highest scores feature | July 16 |
+| The application should not break if the scores file was not found and a new file should be created instead. | Implement the highest scores feature | July 16 |
 | Update the scores file If the user won the game in less time than the highest score | Implement the highest scores feature | July 16 |
 | Print on the screen to notify the user if he got the current highest score | Implement the highest scores feature | July 16 |
 | Calling the scores module will print the highest score per game size and difficulty (based on fastest time). | Implement the highest scores feature | July 16 |

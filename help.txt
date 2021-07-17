@@ -1,0 +1,28 @@
+System requirements
+###################
+- This application runs in a unix-based terminal.
+- You need to have "Bash" available in the terminal.
+
+Dependencies required by the application
+########################################
+- You must have Python 3 installed.
+- You must have pip3 installed.
+- The application also requires "virtualenv" service. However, if this is not found the application will automatically install it.
+- The application will utilize "virtualenv" to install Python's "termcolor" package into a virtual environment without cluttering your system with packages.
+
+How to install the application?
+###############################
+No installation is required. As long as you have the above 2 sections satisfied, the application is ready to be used.
+
+How to run the application?
+###########################
+1- Run the "minesweeper.sh" script with one of the following arguments:
+    - "help" (minesweeper.sh help): will print the help page showing the available options for the script arguments.
+    - "scores" (minesweeper.sh scores): will print the current fastest time for each game diffifculty and board size.
+    - "play" (minesweeper.sh play): will launch the game.
+2- If you launch the game with "minesweeper.sh play":
+    - The application will ask you for the game diffifculty.
+    - Depending on the diffifculty you choose, you may be shown a list of possible board sizes which you have to choose from.
+    - Once you have chosen the game diffifculty and board size, you will be shown a list of possible instructions to play the game.
+    - The instructions will explain how to reveal a cell on the board, or flag/unflag it. That is all what you need to play and win!
+3- Start playing, enjoy and try to beat the records!

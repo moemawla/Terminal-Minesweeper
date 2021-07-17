@@ -3,6 +3,8 @@ This application is a minesweeper game that users can launch and play in the ter
 The game will allow the user to input choices of boxes from the board. If the user chooses a box that contains a mine, the user loses the game. If the user chooses a box that has no bomb, the application will open the box with a number inside it indicating how many bombs are around the box. If there are no bombs around the chosen box, the application will automatically open all boxes immediately surrounding the box.
 Any person will be able to run the application with the help of the provided instructions.
 
+<br/>
+
 # Features
 The application will have the following features:
 - Option to flag or unflag boxes:
@@ -21,6 +23,8 @@ The application will have the following features:
     * These scores will be based on fastest time per game size and difficulty.
     * The scores will be written to, or read from, a separate file.
 
+<br/>
+
 # User Interaction and Experience
 - The user can read the help file provided to undersatand how to start using the application and what are the possible arguments.
 - The user can also call the script with the "help" argument which will return a list of all possible arguments and their descriptions.
@@ -28,7 +32,10 @@ The application will have the following features:
 - When the user runs the script with "scores" argument, the application will print the current fastest times to the terminal.
 - The application should not break if a user passes wrong, or no, arguments and instead should return an error message saying that the argument provided is not supported and print "Run the script with the 'help' argument for a list of possible arguments".
 
+<br/>
 
 # Control Flow Diagram
 
+![Control Flow Diagram](./resources/terminal-minesweepr-flow-chart.jpg)
 
+<br/>

@@ -8,5 +8,6 @@ I have finished working on all the features and the Python application is finali
 I have tested all the features with different scenarios and faced no issues at all. I beleive the final testing was highly successful mostly because of 2 things:
 - I wrote all the functions in a modular and standalone way where each function was not aware how and where it was being called, and therefore assuming that the parameter(s) passed to it might be wrong and that it should validate the parameter(s).
 - I was thoroughly testing every small part I was adding to the code. 
+
 By the end of the day I should be done with writing the bash scripts that will wrap the application and tomorrow will be dedicated to finalizing the documentations. All is going perfectly as scheduled.
 

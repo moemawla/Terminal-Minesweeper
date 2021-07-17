@@ -18,10 +18,10 @@ How to run the application?
 ###########################
 1- The entry-point to the application is "minesweeper.sh". You can call this bash script from anywhere as long as you provide the correct path to it.
 2- Run the "minesweeper.sh" script with one of the following arguments:
-    - "help": will print the help page showing the available options for the script arguments (ex: "minesweeper.sh help").
-    - "scores": will print the current fastest time for each game diffifculty and board size (ex: "minesweeper.sh scores").
-    - "play": will launch the game (ex: "minesweeper.sh play").
-2- If you launch the game with "minesweeper.sh play":
+    - "help": will print the help page showing the available options for the script arguments (ex: "./minesweeper.sh help").
+    - "scores": will print the current fastest time for each game diffifculty and board size (ex: "./minesweeper.sh scores").
+    - "play": will launch the game (ex: "./minesweeper.sh play").
+2- If you launch the game with "./minesweeper.sh play":
     - The application will ask you for the game diffifculty.
     - Depending on the diffifculty you choose, you may be shown a list of possible board sizes which you have to choose from.
     - Once you have chosen the game diffifculty and board size, you will be shown a list of possible instructions to play the game.

@@ -31,8 +31,8 @@ fi
 dir_path=$(dirname $(realpath $0))
 
 # create and activate the virtual environment
-virtualenv $dir_path/../appvenv
-source $dir_path/../appvenv/bin/activate
+virtualenv $dir_path/../src/appvenv
+source $dir_path/../src/appvenv/bin/activate
 
 # install requirements
 pip3 install -r $dir_path/../src/requirements.txt

@@ -12,7 +12,7 @@ then
 fi
 
 # activate virtual env
-source $dir_path/appvenv/bin/activate
+source $dir_path/src/appvenv/bin/activate
 
 # check and process the required argument
 if [[ $1 == "play" ]]

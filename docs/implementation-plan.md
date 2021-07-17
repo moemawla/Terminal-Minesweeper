@@ -1,4 +1,4 @@
-# Implementation plan:
+# Implementation plan
 ### The below table lists all the tasks needed to finalize the application with all the proposed features. The tasks are ordered based on priority from highest to lowest.
 
 | Task | Feature/Scope | Due Date |
@@ -30,3 +30,12 @@
 | If the user inputs 'help' for the required argument, the bash script will return a list of the 3 possible options for the argument ("help", "play" and "scores") | Wrap the application with a bash script | July 16 |
 | If the user inputs 'play' for the required argument, the bash script will call the python module responsible for starting the game | Wrap the application with a bash script | July 16 |
 | If the user inputs 'scores' for the required argument, the bash script will call the python module responsible for printing the current fastest times | Wrap the application with a bash script | July 16 |
+
+<br/><br/>
+
+# Extra features
+### After finalizing all the features in the implementation plan above, I found that I have enough time to implement the following cool extra features:
+1. Implement absolute paths in the bash scripts to allow the application to work from anywhere it was ran from.
+2. Add ASCII art banner to the game.
+3. Print the board cells in different colors depending on their contents, which will drastically improve how the user can view and analyse the board.
+4. The above feature, "Print the board cells in colors", required a third party package to be used which gave me the oppurtunity to use "virtualenv" and increase the complexity of the bash script that is responsible for preparing the environment.
